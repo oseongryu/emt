@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emt.emt.reply.dao.mapper.ReplyMapper">
+	<resultMap id="replyMap" type="emt.emt.common.domain.Reply">
+		<result property="replyNo" column="reply_no"/>
+		<result property="replyContent" column="reply_content"/>
+		<result property="userId" column="user_id"/>
+		<result property="replyDate" column="reply_date"/>
+		<result property="boardNo" column="board_no"/>
+	</resultMap>
+	
+	<select id="replyList" parameterType="map" resultMap="replyMap"> 
+		<![CDATA[
+		SELECT reply_no replyNo, reply_content replyContent, user_id userId, reply_date replyDate, board_no boardNo
+		FROM (SELECT rownum AS rnum, M.* 
+			  FROM (
+			  		SELECT * 
+					FROM reply
+					where board_No=#{boardNo}
+					ORDER BY reply_no DESC
+			  		) M 
+			  WHERE rownum  < = 4*#{type})
+		WHERE rnum > 4*(#{type}-1)
+		]]>
+	</select>
+	
+		<select id="replyCount" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*) 
+		FROM reply
+		where board_no=#{boardNo}
+		]]>
+	</select>
+	<delete id="replyDelete" parameterType="emt.emt.common.domain.Reply">
+	DELETE reply where reply_no=#{replyNo}
+	</delete>
+	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

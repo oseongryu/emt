@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emt.emt.question.dao.mapper.QuestionMapper">
+	<resultMap id="questionMap" type="emt.emt.common.domain.Question">
+		<result property="questionNo" column="question_no" />
+		<result property="questionType" column="question_type" />
+		<result property="questionVideo" column="question_video" />
+	</resultMap>
+
+	<select id="questionList" parameterType="int" resultMap="questionMap">
+		<![CDATA[
+		SELECT question_no questionNo, question_type questionType, question_video questionVideo
+		FROM (SELECT rownum AS rnum, M.* 
+			  FROM (
+			  		SELECT * 
+					FROM question 
+					ORDER BY question_no DESC
+			  		) M 
+			  WHERE rownum  < = 7*#{questionCount})
+		WHERE rnum > 7*(#{questionCount}-1)
+		]]>
+	</select>
+
+
+	<select id="questionCount" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*) 
+		FROM question
+		]]>
+	</select>
+	
+	<select id="questionView" resultType="emt.emt.common.domain.Question">
+		select question_no questionNo, question_type questionType, question_video questionVideo
+		from question
+		where question_no=#{questionNo}
+	</select>
+	<insert id="questionInsert" parameterType="emt.emt.common.domain.Question">
+		INSERT INTO QUESTION values(seq_question_no.nextval, #{questionType}, #{questionVideo})
+	</insert>
+	<delete id="questionDelete" parameterType="emt.emt.common.domain.Question">
+		DELETE FROM QUESTION WHERE question_no=#{questionNo}
+	</delete>	
+</mapper>

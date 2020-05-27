@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emt.emt.member.dao.mapper.MemberMapper">
+	<resultMap id="memberMap" type="emt.emt.common.domain.User">
+		<result property="userId" column="user_id"/>
+		<result property="userPw" column="user_pw"/>
+		<result property="email" column="email"/>
+		<result property="userDate" column="user_date"/>
+	</resultMap>
+	
+	<select id="memberList" parameterType="int" resultMap="memberMap">
+		<![CDATA[
+		SELECT user_id userId, user_pw userPw, email, user_date userDate
+		FROM (SELECT rownum AS rnum, M.* 
+			  FROM (
+			  		SELECT * 
+					FROM users 
+					ORDER BY user_date DESC
+			  		) M 
+			  WHERE rownum  < = 7*#{memberCount})
+		WHERE rnum > 7*(#{memberCount}-1)
+		]]>
+	</select>
+
+	<select id="memberCount" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*) 
+		FROM users
+		]]>
+	</select>
+
+
+
+	<select id="memberView" resultType="emt.emt.common.domain.User">
+	select user_id userId, user_pw userPw, email, user_date userDate
+	from users
+	where user_id=#{userId}
+	</select>
+	
+	<update id="memberUpdate" parameterType="emt.emt.common.domain.User">
+		update users set user_pw=#{userPw}, email=#{email} where user_id=#{userId}
+	</update>
+	
+	<delete id="memberDelete" parameterType="String">
+		DELETE users where user_id=#{userId}
+	</delete>
+
+	<delete id="userMemberDelete" parameterType="String">
+		DELETE users where user_id=#{userId}
+	</delete>
+
+
+</mapper>

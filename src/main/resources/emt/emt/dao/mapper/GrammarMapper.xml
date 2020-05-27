@@ -33,54 +33,88 @@
 
 	<!-- 관리자 문제조회 페이징 -->
 	<select id="grammarCount" resultType="int">
-		<![CDATA[
-		SELECT COUNT(*) 
-		FROM grammar
-		]]>		
+		SELECT COUNT(*)
+		FROM GRAMMAR
 	</select>
 	
 	<!-- 관리자 문제상세보기 -->
 	<select id="grammarView" parameterType="emt.emt.common.domain.Grammar" resultMap="grammarMap">
-		select *
-		from grammar
-		where grammar_no=#{grammarNo}
+		SELECT GRAMMAR_NO
+			, GRAMMAR_QUIZ
+			, GRAMMAR_EX
+			, GRAMMAR_EX1
+			, GRAMMAR_EX2
+			, GRAMMAR_EX3
+			, GRAMMAR_EX4
+			, GRAMMAR_INNING
+			, GRAMMAR_ANSWER
+		FROM GRAMMAR
+		WHERE GRAMMAR_NO = #{grammarNo}
 	</select>
 	
 	<!--  관리자 문제등록 -->
 	<insert id="grammarAdd" parameterType="emt.emt.common.domain.Grammar">
-		insert into grammar values(seq_grammar_no.nextval, #{grammarQuiz}, #{grammarEx}, #{grammarEx1},
-		 #{grammarEx2}, #{grammarEx3}, #{grammarEx4}, #{grammarInning}, #{grammarAnswer})
+		INSERT INTO GRAMMAR(
+			  GRAMMAR_NO
+			, GRAMMAR_QUIZ
+			, GRAMMAR_EX
+			, GRAMMAR_EX1
+			, GRAMMAR_EX2
+			, GRAMMAR_EX3
+			, GRAMMAR_EX4
+			, GRAMMAR_INNING
+			, GRAMMAR_ANSWER
+			)
+		VALUES (
+			  SEQ_GRAMMAR_NO.NEXTVAL
+			, #{grammarQuiz}
+			, #{grammarEx}
+			, #{grammarEx1}
+			, #{grammarEx2}
+			, #{grammarEx3}
+			, #{grammarEx4}
+			, #{grammarInning}
+			, #{grammarAnswer}
+			)
 	</insert>
 	
 	<!-- 관리자 문제수정 -->
 	<update id="grammarUpdate" parameterType="emt.emt.common.domain.Grammar">
-		update grammar
+		UPDATE GRAMMAR
 		<set>
-			<if test="grammarQuiz != null">grammar_quiz=#{grammarQuiz},</if>
-			<if test="grammarEx  != null">grammar_ex=#{grammarEx},</if>
-			<if test="grammarEx1 != null">grammar_ex1=#{grammarEx1},</if>
-			<if test="grammarEx2 != null">grammar_ex2=#{grammarEx2},</if>
-			<if test="grammarEx3 != null">grammar_ex3=#{grammarEx3},</if>
-			<if test="grammarEx4 != null">grammar_ex4=#{grammarEx4},</if>
-			<if test="grammarInning != null">grammar_inning=#{grammarInning},</if>
-			<if test="grammarAnswer != null">grammar_answer=#{grammarAnswer}</if>
+			<if test="grammarQuiz != null">	   GRAMMAR_QUIZ=#{grammarQuiz}	</if>
+			<if test="grammarEx  != null">	 , GRAMMAR_EX=#{grammarEx}	  	</if>
+			<if test="grammarEx1 != null">	 , GRAMMAR_EX1=#{grammarEx1}	</if>
+			<if test="grammarEx2 != null">	 , GRAMMAR_EX2=#{grammarEx2}	</if>
+			<if test="grammarEx3 != null">	 , GRAMMAR_EX3=#{grammarEx3}	</if>
+			<if test="grammarEx4 != null">	 , GRAMMAR_EX4=#{grammarEx4}	</if>
+			<if test="grammarInning != null">, GRAMMAR_INNING=#{grammarInning}</if>
+			<if test="grammarAnswer != null">, GRAMMAR_ANSWER=#{grammarAnswer}</if>
 		</set>
-		where grammar_no=#{grammarNo}
+		WHERE GRAMMAR_NO=#{grammarNo}
 	</update>
 	
 	<!-- 관리자 문제삭제 -->
 	<delete id="grammarDelete" parameterType="emt.emt.common.domain.Grammar">
-		delete grammar where grammar_no=#{grammarNo}
+		DELETE GRAMMAR
+		WHERE GRAMMAR_NO = #{grammarNo}
 	</delete>
 	
 	
 	<!-- 사용자 문제출력 -->
 	<select id="userGrammarList" parameterType="map" resultMap="grammarMap">
-		SELECT grammar_no grammarNo, grammar_quiz grammarQuiz, grammar_ex grammarEx, grammar_ex1 grammarEx1,
-			   grammar_ex2 grammarEx2, grammar_ex3 grammarEx3, grammar_ex4 grammarEx4, grammar_inning grammarInning,
-			   grammar_answer grammarAnswer
-		FROM grammar
-		WHERE grammar_inning=#{grammarInning}
+		SELECT GRAMMAR_NO GRAMMARNO
+			, GRAMMAR_QUIZ GRAMMARQUIZ
+			, GRAMMAR_EX GRAMMAREX
+			, GRAMMAR_EX1 GRAMMAREX1
+			, GRAMMAR_EX2 GRAMMAREX2
+			, GRAMMAR_EX3 GRAMMAREX3
+			, GRAMMAR_EX4 GRAMMAREX4
+			, GRAMMAR_INNING GRAMMARINNING
+			, GRAMMAR_ANSWER GRAMMARANSWER
+		FROM GRAMMAR
+		WHERE GRAMMAR_INNING = #{grammarInning}
+
 	
 	</select>
 	

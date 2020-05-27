@@ -1,24 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<title>EMT</title>
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
-<!-- Tell the browser to be responsive to screen width -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet"
-	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<link href="<c:url value="/css/AdminLTE.min.css" />" rel="stylesheet"
-	type="text/css">
-<link href="<c:url value="/css/blue.css" />" rel="stylesheet"
-	type="text/css">
-<link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet"
-	type="text/css">
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="<c:url value="/js/adminLogin.js" />"></script>
+<jsp:include page="/WEB-INF/views/template/header.jsp"/>
 
 <body class="hold-transition login-page">
 

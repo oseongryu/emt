@@ -37,42 +37,66 @@
 	
 	<insert id="noticeInsert" parameterType="emt.emt.common.domain.Board">
 		
-		insert all
-  		into board values(board_no, board_title, board_content, user_id, board_date, board_count)
- 		into notice values(board_no)
-  		select #{boardNo} as board_no, 
-  				#{boardTitle} as board_title, 
-  				#{boardContent} as board_content,
-        		#{userId} as user_id, 
-        		sysdate as board_date,
-        		 0 as board_count
-        from dual
+		INSERT ALL
+		INTO board
+		VALUES (
+			board_no
+			, board_title
+			, board_content
+			, user_id
+			, board_date
+			, board_count
+			)
+		INTO notice
+		VALUES (board_no)
+		
+		SELECT #{boardNo} AS board_no
+			, #{boardTitle} AS board_title
+			, #{boardContent} AS board_content
+			, #{userId} AS user_id
+			, sysdate AS board_date
+			, 0 AS board_count
+		FROM dual
 	</insert>
 	
 	
 	<update id="noticeUpdate" parameterType="emt.emt.common.domain.Notice">
-	  update board set BOARD_TITLE=#{boardTitle}, BOARD_CONTENT=#{boardContent}
-	  	where BOARD_NO=#{boardNo}
+		UPDATE board
+		SET BOARD_TITLE = #{boardTitle}
+			, BOARD_CONTENT = #{boardContent}
+		WHERE BOARD_NO = #{boardNo}
+
 	</update>
 	
 	<delete id="noticeDelete" parameterType="emt.emt.common.domain.Notice">
-	  delete notice where BOARD_NO=#{boardNo}
+		DELETE notice
+		WHERE BOARD_NO = #{boardNo}
+
 	</delete>
 	
 	<!-- 인덱스 최근공지사항 목록  -->
 	<select id="indexNoticeList" parameterType="int" resultMap="noticeMap">
 		<![CDATA[
-		SELECT board_no boardNo, board_title boardTitle, board_content boardContent, board_date boardDate,
-			   board_count boardCount, user_id userId
-		FROM (SELECT rownum AS rnum, M.* 
-			  FROM (
-			  		SELECT b.* 
-					FROM board b, notice n
-					WHERE b.board_no = n.board_no
-					ORDER BY board_date DESC
-			  		) M 
-			  WHERE rownum  < = 4*#{noticeCount})
-		WHERE rnum > 4*(#{noticeCount}-1)
+		SELECT board_no boardNo
+			, board_title boardTitle
+			, board_content boardContent
+			, board_date boardDate
+			, board_count boardCount
+			, user_id userId
+		FROM (
+			SELECT rownum AS rnum
+				, M.*
+			FROM (
+				SELECT b.*
+				FROM board b
+					, notice n
+				WHERE b.board_no = n.board_no
+				ORDER BY board_date DESC
+				) M
+			WHERE rownum < = 4 * #{noticeCount}
+			)
+		WHERE rnum > 4 * (#{noticeCount} - 1)
+
 		]]>
 	</select>
 	

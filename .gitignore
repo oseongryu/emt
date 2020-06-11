@@ -15,7 +15,7 @@ cmake-build-debug/
 target/
 .idea
 classes/
-META-INF/
+# META-INF/
   
 # OS Files #
 .DS_Store

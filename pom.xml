@@ -126,7 +126,7 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>12.1.0.2</version>
 			<scope>system</scope>
-			<systemPath>C:/Users/f5074/Downloads/ojdbc6-12.1.0.2.jar</systemPath>
+			<systemPath>${basedir}/lib/ojdbc6-12.1.0.2.jar</systemPath>
 		</dependency>
 		
 		<!-- mybatis-spring -->
@@ -370,6 +370,22 @@
                     <outputEncoding>${encoding}</outputEncoding>
                     <linkJavadoc>true</linkJavadoc>
                     <javadocDir>apidocs</javadocDir>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <!-- 로컬 lib파일 경로 -->
+                            <directory>${basedir}/lib</directory>
+                            <includes>
+                                <include>ojdbc6-12.1.0.2.jar</include>
+                            </includes>
+                            <targetPath>WEB-INF/lib</targetPath>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
         </plugins>

@@ -13,7 +13,7 @@ public class User {
 	private String userId;
 	private String userPw;
 	private String email;
-	private Date userDate;
+	private String userDate;
 	private int auth;
 	private String uuid;
 	public int getAuth() {
@@ -48,11 +48,11 @@ public class User {
 		this.email = email;
 	}
 	
-	public Date getUserDate() {
+	public String getUserDate() {
 		return userDate;
 	}
 
-	public void setUserDate(Date userDate) {
+	public void setUserDate(String userDate) {
 		this.userDate = userDate;
 	}
 	

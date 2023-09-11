@@ -15,7 +15,7 @@ public class Reply {
 	private int replyNo;
 	private String replyContent;
 	private String userId;
-	private Date replyDate;
+	private String replyDate;
 	private int boardNo;
 	
 	public int getReplyNo() {
@@ -36,10 +36,10 @@ public class Reply {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Date getReplyDate() {
+	public String getReplyDate() {
 		return replyDate;
 	}
-	public void setReplyDate(Date replyDate) {
+	public void setReplyDate(String replyDate) {
 		this.replyDate = replyDate;
 	}
 	public int getBoardNo() {

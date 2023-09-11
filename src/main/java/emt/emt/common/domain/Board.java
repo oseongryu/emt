@@ -18,7 +18,7 @@ public class Board {
 	private String boardTitle;
 	private String boardContent;
 	private String userId;
-	private Date boardDate;
+	private String boardDate;
 	private int boardCount;
 
 		
@@ -34,16 +34,17 @@ public class Board {
 	public void setBoardTitle(String boardTitle) {
 		this.boardTitle = boardTitle;
 	}
+
 	public String getBoardContent() {
 		return boardContent;
 	}
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
-	public Date getBoardDate() {
+	public String getBoardDate() {
 		return boardDate;
 	}
-	public void setBoardDate(Date boardDate) {
+	public void setBoardDate(String boardDate) {
 		this.boardDate = boardDate;
 	}
 	public int getBoardCount() {

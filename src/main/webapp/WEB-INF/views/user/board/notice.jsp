@@ -257,6 +257,6 @@
 	<!-- logout.js -->
 	<script src="<c:url value="/js/logout.js"/>"></script>
 	<!-- noticeList.js 링크 -->
-	<script src="<c:url value="/js/board/noticeList.js"/>"></script>
+	<script src="<c:url value="/js/board/noticeList.js?v=2"/>"></script>
 </body>
 </html>

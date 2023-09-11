@@ -18,7 +18,7 @@ public class Notice {
 	private String boardTitle;
 	private String boardContent;
 	private String userId;
-	private Date boardDate;
+	private String boardDate;
 	private int boardCount;
 
 		
@@ -40,10 +40,10 @@ public class Notice {
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
-	public Date getBoardDate() {
+	public String getBoardDate() {
 		return boardDate;
 	}
-	public void setBoardDate(Date boardDate) {
+	public void setBoardDate(String boardDate) {
 		this.boardDate = boardDate;
 	}
 	public int getBoardCount() {
